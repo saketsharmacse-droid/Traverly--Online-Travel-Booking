@@ -291,3 +291,179 @@
             margin-bottom: 0.5rem;
         }
 
+        .result-info p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .book-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #00cc66, #00ff88);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 204, 102, 0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .bill-container {
+            margin-top: 1rem;
+        }
+
+        .bill-header {
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .bill-details {
+            padding: 1rem 0;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .bill-total {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0066cc, #4da6ff);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Packages Section */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .package-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .package-image {
+            height: 200px;
+            background: linear-gradient(135deg, #4da6ff, #0066cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .package-info {
+            padding: 1.5rem;
+        }
+
+        .package-info h3 {
+            color: #003d7a;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .package-price {
+            font-size: 1.3rem;
+            color: #0066cc;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Static Demo Note */
+        .demo-note {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: #666;
+            border-left: 4px solid #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ocean Background -->
+    <div id="ocean-bg"></div>
+    
+    <!-- Animated Sea Creatures -->
+    <div class="fish" style="top: 20%; animation-delay: 0s;">🐟</div>
+    <div class="fish" style="top: 40%; animation-delay: 5s;">🐠</div>
+    <div class="fish" style="top: 60%; animation-delay: 10s;">🐡</div>
+    <div class="fish" style="top: 30%; animation-delay: 15s;">🦈</div>
+    <div class="shark" style="top: 70%; animation-delay: 0s;">🦈</div>
+    <div class="fish" style="top: 50%; animation-delay: 7s;">🐟</div>
+    
+    <!-- Bubbles -->
+    <div class="bubble" style="width: 20px; height: 20px; left: 10%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; left: 30%;
