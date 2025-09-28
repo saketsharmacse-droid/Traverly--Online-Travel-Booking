@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traverly - Your Ocean of Adventures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #001f3f 0%, #003d7a 50%, #0066cc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ocean Background Animation */
+        #ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(180deg, #001f3f 0%, #003d7a 30%, #0066cc 60%, #4da6ff 100%);
+        }
+
+        /* Animated Fish */
+        .fish {
+            position: absolute;
+            font-size: 30px;
+            animation: swim 20s linear infinite;
+            z-index: 1;
+        }
+
+        .shark {
+            position: absolute;
+            font-size: 50px;
+            animation: swimSlow 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes swim {
+            from {
+                transform: translateX(-100px);
+            }
+            to {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        @keyframes swimSlow {
+            from {
+                transform: translateX(100vw) scaleX(-1);
+            }
+            to {
+                transform: translateX(-200px) scaleX(-1);
+            }
+        }
+
+        /* Bubbles */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rise 10s infinite;
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 31, 63, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4da6ff;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4da6ff;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-form {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4da6ff;
+        }
+
+        .search-btn {
+            grid-column: span 2;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0066cc, #4da6ff);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        /* Results Section */
+        .results-section {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-info h3 {
+            color: #003d7a;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-info p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .book-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #00cc66, #00ff88);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 204, 102, 0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .bill-container {
+            margin-top: 1rem;
+        }
+
+        .bill-header {
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .bill-details {
+            padding: 1rem 0;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .bill-total {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0066cc, #4da6ff);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Packages Section */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .package-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .package-image {
+            height: 200px;
+            background: linear-gradient(135deg, #4da6ff, #0066cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .package-info {
+            padding: 1.5rem;
+        }
+
+        .package-info h3 {
+            color: #003d7a;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .package-price {
+            font-size: 1.3rem;
+            color: #0066cc;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ocean Background -->
+    <div id="ocean-bg"></div>
+    
+    <!-- Animated Sea Creatures -->
+    <div class="fish" style="top: 20%; animation-delay: 0s;">🐟</div>
+    <div class="fish" style="top: 40%; animation-delay: 5s;">🐠</div>
+    <div class="fish" style="top: 60%; animation-delay: 10s;">🐡</div>
+    <div class="fish" style="top: 30%; animation-delay: 15s;">🦈</div>
+    <div class="shark" style="top: 70%; animation-delay: 0s;">🦈</div>
+    <div class="fish" style="top: 50%; animation-delay: 7s;">🐟</div>
+    
+    <!-- Bubbles -->
+    <div class="bubble" style="width: 20px; height: 20px; left: 10%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; left: 30%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 25px; height: 25px; left: 50%; animation-delay: 4s;"></div>
+    <div class="bubble" style="width: 10px; height: 10px; left: 70%; animation-delay: 6s;"></div>
+    <div class="bubble" style="width: 30px; height: 30px; left: 90%; animation-delay: 8s;"></div>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">🌊 Traverly</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showTab('flights')">Flights</a></li>
+                <li><a href="#" onclick="showTab('hotels')">Hotels</a></li>
+                <li><a href="#" onclick="showTab('trains')">Trains</a></li>
+                <li><a href="#" onclick="showTab('packages')">Packages</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-section">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('flights')">✈️ Flights</button>
+                <button class="tab" onclick="showTab('hotels')">🏨 Hotels</button>
+                <button class="tab" onclick="showTab('trains')">🚂 Trains</button>
+                <button class="tab" onclick="showTab('packages')">📦 Packages</button>
+            </div>
+
+            <!-- Flights Tab -->
+            <div id="flights" class="tab-content active">
+                <form class="search-form" onsubmit="searchFlights(event)">
+                    <div class="form-group">
+                        <label>From</label>
+                        <select required>
+                            <option value="">Select City</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Chennai">Chennai</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>To</label>
+                        <select required>
+                            <option value="">Select City</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Dubai">Dubai</option>
+                            <option value="Singapore">Singapore</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Departure Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Passengers</label>
+                        <input type="number" min="1" max="10" value="1" required>
+                    </div>
+                    <button type="submit" class="search-btn">Search Flights 🔍</button>
+                </form>
+            </div>
+
+            <!-- Hotels Tab -->
+            <div id="hotels" class="tab-content">
+                <form class="search-form" onsubmit="searchHotels(event)">
+                    <div class="form-group">
+                        <label>Destination</label>
+                        <select required>
+                            <option value="">Select City</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Manali">Manali</option>
+                            <option value="Ooty">Ooty</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-in Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Guests</label>
+                        <input type="number" min="1" max="10" value="2" required>
+                    </div>
+                    <button type="submit" class="search-btn">Search Hotels 🔍</button>
+                </form>
+            </div>
+
+            <!-- Trains Tab -->
+            <div id="trains" class="tab-content">
+                <form class="search-form" onsubmit="searchTrains(event)">
+                    <div class="form-group">
+                        <label>From Station</label>
+                        <select required>
+                            <option value="">Select Station</option>
+                            <option value="New Delhi">New Delhi</option>
+                            <option value="Mumbai Central">Mumbai Central</option>
+                            <option value="Howrah">Howrah</option>
+                            <option value="Chennai Central">Chennai Central</option>
+                            <option value="Bangalore City">Bangalore City</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>To Station</label>
+                        <select required>
+                            <option value="">Select Station</option>
+                            <option value="Agra">Agra</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Varanasi">Varanasi</option>
+                            <option value="Amritsar">Amritsar</option>
+                            <option value="Kochi">Kochi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Travel Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Class</label>
+                        <select required>
+                            <option value="AC 1st">AC 1st Class</option>
+                            <option value="AC 2 Tier">AC 2 Tier</option>
+                            <option value="AC 3 Tier">AC 3 Tier</option>
+                            <option value="Sleeper">Sleeper</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="search-btn">Search Trains 🔍</button>
+                </form>
+            </div>
+
+            <!-- Packages Tab -->
+            <div id="packages" class="tab-content">
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <div class="package-image">🏝️</div>
+                        <div class="package-info">
+                            <h3>Goa Beach Paradise</h3>
+                            <p>5 Days / 4 Nights<br>Flight + Hotel + Meals</p>
+                            <div class="package-price">₹25,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Goa Beach Paradise', 25999)">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="package-card">
+                        <div class="package-image">🏔️</div>
+                        <div class="package-info">
+                            <h3>Himalayan Adventure</h3>
+                            <p>7 Days / 6 Nights<br>Transport + Hotel + Activities</p>
+                            <div class="package-price">₹35,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Himalayan Adventure', 35999)">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="package-card">
+                        <div class="package-image">🌴</div>
+                        <div class="package-info">
+                            <h3>Kerala Backwaters</h3>
+                            <p>4 Days / 3 Nights<br>Houseboat + Resort + Ayurveda</p>
+                            <div class="package-price">₹18,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Kerala Backwaters', 18999)">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="package-card">
+                        <div class="package-image">🏰</div>
+                        <div class="package-info">
+                            <h3>Rajasthan Heritage</h3>
+                            <p>6 Days / 5 Nights<br>Palace Hotels + Cultural Tours</p>
+                            <div class="package-price">₹42,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Rajasthan Heritage', 42999)">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results-section"></div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Booking Confirmation</h2>
+            <div id="billContent" class="bill-container"></div>
+            <button class="download-btn" onclick="downloadBill()">Download Bill as PDF</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if(tab.textContent.toLowerCase().includes(tabName)) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // Flight Search
+        function searchFlights(event) {
+            event.preventDefault();
+            const results = document.getElementById('results');
+            results.innerHTML = `
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>IndiGo 6E-2342</h3>
+                        <p>Departure: 06:00 AM | Arrival: 08:30 AM</p>
+                        <p>Non-stop | Economy</p>
+                    </div>
+                    <div>
+                        <div class="price">₹4,599</div>
+                        <button class="book-btn" onclick="bookFlight('IndiGo 6E-2342', 4599)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Air India AI-801</h3>
+                        <p>Departure: 10:15 AM | Arrival: 12:45 PM</p>
+                        <p>Non-stop | Economy</p>
+                    </div>
+                    <div>
+                        <div class="price">₹5,299</div>
+                        <button class="book-btn" onclick="bookFlight('Air India AI-801', 5299)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>SpiceJet SG-415</h3>
+                        <p>Departure: 02:30 PM | Arrival: 05:00 PM</p>
+                        <p>1 Stop | Economy</p>
+                    </div>
+                    <div>
+                        <div class="price">₹3,899</div>
+                        <button class="book-btn" onclick="bookFlight('SpiceJet SG-415', 3899)">Book</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Hotel Search
+        function searchHotels(event) {
+            event.preventDefault();
+            const results = document.getElementById('results');
+            results.innerHTML = `
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Ocean Pearl Resort ⭐⭐⭐⭐⭐</h3>
+                        <p>Beach View | Free WiFi | Breakfast Included</p>
+                        <p>Swimming Pool | Spa | Restaurant</p>
+                    </div>
+                    <div>
+                        <div class="price">₹8,999/night</div>
+                        <button class="book-btn" onclick="bookHotel('Ocean Pearl Resort', 8999)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Coral Beach Hotel ⭐⭐⭐⭐</h3>
+                        <p>Sea View | AC Rooms | Complimentary Breakfast</p>
+                        <p>Bar | Gym | 24/7 Room Service</p>
+                    </div>
+                    <div>
+                        <div class="price">₹5,499/night</div>
+                        <button class="book-btn" onclick="bookHotel('Coral Beach Hotel', 5499)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Sunset Paradise Inn ⭐⭐⭐</h3>
+                        <p>Garden View | Free Parking | WiFi</p>
+                        <p>Restaurant | Tour Desk</p>
+                    </div>
+                    <div>
+                        <div class="price">₹3,299/night</div>
+                        <button class="book-btn" onclick="bookHotel('Sunset Paradise Inn', 3299)">Book</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Train Search
+        function searchTrains(event) {
+            event.preventDefault();
+            const results = document.getElementById('results');
+            results.innerHTML = `
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Shatabdi Express (12002)</h3>
+                        <p>Departure: 06:00 AM | Arrival: 02:00 PM</p>
+                        <p>AC Chair Car | Meals Included</p>
+                    </div>
+                    <div>
+                        <div class="price">₹1,855</div>
+                        <button class="book-btn" onclick="bookTrain('Shatabdi Express', 1855)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Rajdhani Express (12301)</h3>
+                        <p>Departure: 04:30 PM | Arrival: 10:30 AM</p>
+                        <p>AC 2 Tier | Meals Included</p>
+                    </div>
+                    <div>
+                        <div class="price">₹2,455</div>
+                        <button class="book-btn" onclick="bookTrain('Rajdhani Express', 2455)">Book</button>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Duronto Express (12269)</h3>
+                        <p>Departure: 11:00 PM | Arrival: 05:00 PM</p>
+                        <p>AC 3 Tier | Non-stop</p>
+                    </div>
+                    <div>
+                        <div class="price">₹1,355</div>
+                        <button class="book-btn" onclick="bookTrain('Duronto Express', 1355)">Book</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Booking functions
+        let currentBooking = {};
+
+        function bookFlight(flightName, price) {
+            currentBooking = {
+                type: 'Flight',
+                name: flightName,
+                price: price,
+                date: new Date().toLocaleDateString(),
+                bookingId: 'FL' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+            showBookingModal();
+        }
+
+        function bookHotel(hotelName, price) {
+            currentBooking = {
+                type: 'Hotel',
+                name: hotelName,
+                price: price,
+                date: new Date().toLocaleDateString(),
+                bookingId: 'HT' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+            showBookingModal();
+        }
+
+        function bookTrain(trainName, price) {
+            currentBooking = {
+                type: 'Train',
+                name: trainName,
+                price: price,
+                date: new Date().toLocaleDateString(),
+                bookingId: 'TR' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+            showBookingModal();
+        }
+
+        function bookPackage(packageName, price) {
+            currentBooking = {
+                type: 'Package',
+                name: packageName,
+                price: price,
+                date: new Date().toLocaleDateString(),
+                bookingId: 'PK' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+            showBookingModal();
+        }
+
+        function showBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            const billContent = document.getElementById('billContent');
+            
+            const subtotal = currentBooking.price;
+            const tax = Math.round(subtotal * 0.18); // 18% GST
+            const total = subtotal + tax;
+            
+            billContent.innerHTML = `
+                <div class="bill-header">
+                    <h1 style="color: #0066cc;">🌊 Traverly</h1>
+                    <p>Your Ocean of Adventures</p>
+                </div>
+                <div class="bill-details">
+                    <div class="bill-row">
+                        <strong>Booking ID:</strong>
+                        <span>${currentBooking.bookingId}</span>
+                    </div>
+                    <div class="bill-row">
+                        <strong>Date:</strong>
+                        <span>${currentBooking.date}</span>
+                    </div>
+                    <div class="bill-row">
+                        <strong>Type:</strong>
+                        <span>${currentBooking.type}</span>
+                    </div>
+                    <div class="bill-row">
+                        <strong>Service:</strong>
+                        <span>${currentBooking.name}</span>
+                    </div>
+                    <div class="bill-row">
+                        <strong>Base Amount:</strong>
+                        <span>₹${subtotal.toLocaleString()}</span>
+                    </div>
+                    <div class="bill-row">
+                        <strong>GST (18%):</strong>
+                        <span>₹${tax.toLocaleString()}</span>
+                    </div>
+                    <div class="bill-row bill-total">
+                        <strong>Total Amount:</strong>
+                        <span>₹${total.toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        function downloadBill() {
+            const billContent = document.getElementById('billContent').innerHTML;
+            const printWindow = window.open('', '_blank');
+            
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Traverly Invoice</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 20px;
+                            max-width: 600px;
+                            margin: 0 auto;
+                        }
+                        .bill-header {
+                            text-align: center;
+                            padding-bottom: 20px;
+                            border-bottom: 2px solid #e0e0e0;
+                        }
+                        .bill-details {
+                            padding: 20px 0;
+                        }
+                        .bill-row {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 10px 0;
+                        }
+                        .bill-total {
+                            border-top: 2px solid #e0e0e0;
+                            padding-top: 20px;
+                            margin-top: 20px;
+                            font-weight: bold;
+                            font-size: 1.2rem;
+                        }
+                        @media print {
+                            body {
+                                print-color-adjust: exact;
+                                -webkit-print-color-adjust: exact;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${billContent}
+                    <div style="margin-top: 50px; text-align: center; color: #666;">
+                        <p>Thank you for choosing Traverly!</p>
+                        <p>For support: support@traverly.com | +91-1800-TRAVERLY</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            printWindow.document.write(htmlContent);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Add more sea creatures dynamically
+        function addMoreCreatures() {
+            const creatures = ['🐟', '🐠', '🐡', '🦈', '🐙', '🦑', '🦐', '🦀', '🐢', '🐬'];
+            setInterval(() => {
+                const creature = document.createElement('div');
+                creature.className = Math.random() > 0.8 ? 'shark' : 'fish';
+                creature.style.top = Math.random() * 80 + 10 + '%';
+                creature.style.animationDelay = '0s';
+                creature.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                creature.textContent = creatures[Math.floor(Math.random() * creatures.length)];
+                document.body.appendChild(creature);
+                
+                setTimeout(() => creature.remove(), 35000);
+            }, 5000);
+        }
+
+        // Add more bubbles
+        function addMoreBubbles() {
+            setInterval(() => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.width = Math.random() * 20 + 10 + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDelay = '0s';
+                bubble.style.animationDuration = Math.random() * 5 + 8 + 's';
+                document.getElementById('ocean-bg').appendChild(bubble);
+                
+                setTimeout(() => bubble.remove(), 13000);
+            }, 2000);
+        }
+
+        // Initialize animations
+        window.onload = function() {
+            addMoreCreatures();
+            addMoreBubbles();
+        }
+    </script>
+</body>
+</html>
