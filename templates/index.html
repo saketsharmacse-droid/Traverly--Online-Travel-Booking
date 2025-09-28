@@ -30,12 +30,13 @@
             background: linear-gradient(180deg, #001f3f 0%, #003d7a 30%, #0066cc 60%, #4da6ff 100%);
         }
 
-        /* Animated Fish */
+        /* Enhanced Animated Fish */
         .fish {
             position: absolute;
             font-size: 30px;
             animation: swim 20s linear infinite;
             z-index: 1;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
 
         .shark {
@@ -43,126 +44,198 @@
             font-size: 50px;
             animation: swimSlow 30s linear infinite;
             z-index: 1;
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.4));
         }
 
         @keyframes swim {
             from {
-                transform: translateX(-100px);
+                transform: translateX(-100px) rotate(-5deg);
+            }
+            50% {
+                transform: translateX(calc(50vw)) rotate(5deg);
             }
             to {
-                transform: translateX(calc(100vw + 100px));
+                transform: translateX(calc(100vw + 100px)) rotate(-5deg);
             }
         }
 
         @keyframes swimSlow {
             from {
-                transform: translateX(100vw) scaleX(-1);
+                transform: translateX(100vw) scaleX(-1) rotate(3deg);
+            }
+            50% {
+                transform: translateX(calc(50vw)) scaleX(-1) rotate(-3deg);
             }
             to {
-                transform: translateX(-200px) scaleX(-1);
+                transform: translateX(-200px) scaleX(-1) rotate(3deg);
             }
         }
 
-        /* Bubbles */
+        /* Enhanced Bubbles */
         .bubble {
             position: absolute;
             bottom: -50px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(135, 206, 250, 0.4));
             border-radius: 50%;
-            opacity: 0.7;
-            animation: rise 10s infinite;
+            opacity: 0.8;
+            animation: rise 12s infinite ease-in-out;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         @keyframes rise {
-            to {
-                transform: translateY(-120vh) rotate(360deg);
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-60vh) scale(1.2) rotate(180deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-120vh) scale(0.8) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Header */
+        /* Header with enhanced styling */
         header {
             background: rgba(0, 31, 63, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             padding: 1rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: #4da6ff;
             text-decoration: none;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
         }
 
         .nav-links a:hover {
             color: #4da6ff;
+            background: rgba(77, 166, 255, 0.1);
+            transform: translateY(-2px);
         }
 
-        /* Main Container */
+        /* Enhanced Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
             position: relative;
             z-index: 10;
         }
 
-        /* Search Section */
-        .search-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
             margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b3d9ff;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .tabs {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             border-bottom: 2px solid #e0e0e0;
+            justify-content: center;
         }
 
         .tab {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             background: none;
             border: none;
             color: #666;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
             margin-bottom: -2px;
+            border-radius: 15px 15px 0 0;
+            font-weight: 600;
         }
 
         .tab.active {
             color: #0066cc;
             border-bottom-color: #0066cc;
+            background: rgba(0, 102, 204, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .tab:hover {
+            color: #4da6ff;
+            background: rgba(77, 166, 255, 0.1);
         }
 
         .tab-content {
@@ -171,18 +244,18 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.6s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .search-form {
             display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         }
 
         .form-group {
@@ -191,98 +264,166 @@
         }
 
         .form-group label {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .form-group input,
         .form-group select {
-            padding: 0.8rem;
+            padding: 1rem;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: white;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #4da6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(77, 166, 255, 0.2);
         }
 
         .search-btn {
             grid-column: span 2;
-            padding: 1rem;
-            background: linear-gradient(135deg, #0066cc, #4da6ff);
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #0066cc, #4da6ff, #00ccff);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
+            background: linear-gradient(135deg, #0052a3, #3d8bff, #00b3e6);
         }
 
-        /* Results Section */
+        /* Enhanced Results Section */
         .results-section {
             display: grid;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .result-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.3s;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .result-card:hover::before {
+            left: 100%;
         }
 
         .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .result-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
         .result-info h3 {
             color: #003d7a;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
         }
 
         .result-info p {
             color: #666;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .result-rating {
+            color: #ff6b35;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .result-price-section {
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .price {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #0066cc;
             font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 0.5rem;
+        }
+
+        .discount {
+            background: linear-gradient(135deg, #ff6b35, #ff8e53);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
         }
 
         .book-btn {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #00cc66, #00ff88);
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #00cc66, #00ff88, #33ff99);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .book-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 204, 102, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0, 204, 102, 0.4);
         }
 
-        /* Modal */
+        /* Enhanced Modal */
         .modal {
             display: none;
             position: fixed;
@@ -290,154 +431,307 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 95%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: modalAppear 0.4s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .close-modal {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             color: #666;
+            transition: color 0.3s;
         }
 
-        .bill-container {
-            margin-top: 1rem;
+        .close-modal:hover {
+            color: #ff6b35;
         }
 
-        .bill-header {
-            text-align: center;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .bill-details {
-            padding: 1rem 0;
-        }
-
-        .bill-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-        }
-
-        .bill-total {
-            border-top: 2px solid #e0e0e0;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .download-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #0066cc, #4da6ff);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        /* Packages Section */
+        /* Enhanced Packages Section */
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .package-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .package-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
 
         .package-image {
-            height: 200px;
-            background: linear-gradient(135deg, #4da6ff, #0066cc);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.7), rgba(77, 166, 255, 0.3));
+        }
+
+        .package-emoji {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            z-index: 2;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
         }
 
         .package-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .package-info h3 {
             color: #003d7a;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
         }
 
         .package-info p {
             color: #666;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .package-price {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: #0066cc;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .package-features li {
+            padding: 0.3rem 0;
+            color: #666;
+        }
+
+        .package-features li:before {
+            content: '✓';
+            color: #00cc66;
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: white;
+            text-align: center;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: rgba(0, 31, 63, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .made-with-love {
+            font-size: 1.1rem;
+            color: #b3d9ff;
+            margin-bottom: 1rem;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #b3d9ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #4da6ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-btn {
+                grid-column: span 1;
+            }
+            
+            .result-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #4da6ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* New destination images */
+        .goa-bg { background-image: url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .himalaya-bg { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .kerala-bg { background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .rajasthan-bg { background-image: url('https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .andaman-bg { background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .kashmir-bg { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
     </style>
 </head>
 <body>
     <!-- Ocean Background -->
     <div id="ocean-bg"></div>
     
-    <!-- Animated Sea Creatures -->
-    <div class="fish" style="top: 20%; animation-delay: 0s;">🐟</div>
-    <div class="fish" style="top: 40%; animation-delay: 5s;">🐠</div>
-    <div class="fish" style="top: 60%; animation-delay: 10s;">🐡</div>
-    <div class="fish" style="top: 30%; animation-delay: 15s;">🦈</div>
-    <div class="shark" style="top: 70%; animation-delay: 0s;">🦈</div>
-    <div class="fish" style="top: 50%; animation-delay: 7s;">🐟</div>
+    <!-- Enhanced Animated Sea Creatures -->
+    <div class="fish" style="top: 15%; animation-delay: 0s;">🐟</div>
+    <div class="fish" style="top: 35%; animation-delay: 5s;">🐠</div>
+    <div class="fish" style="top: 55%; animation-delay: 10s;">🐡</div>
+    <div class="fish" style="top: 75%; animation-delay: 15s;">🦈</div>
+    <div class="shark" style="top: 65%; animation-delay: 0s;">🦈</div>
+    <div class="fish" style="top: 45%; animation-delay: 7s;">🐟</div>
+    <div class="fish" style="top: 25%; animation-delay: 12s;">🐬</div>
+    <div class="fish" style="top: 85%; animation-delay: 18s;">🐙</div>
     
-    <!-- Bubbles -->
-    <div class="bubble" style="width: 20px; height: 20px; left: 10%; animation-delay: 0s;"></div>
-    <div class="bubble" style="width: 15px; height: 15px; left: 30%; animation-delay: 2s;"></div>
-    <div class="bubble" style="width: 25px; height: 25px; left: 50%; animation-delay: 4s;"></div>
-    <div class="bubble" style="width: 10px; height: 10px; left: 70%; animation-delay: 6s;"></div>
-    <div class="bubble" style="width: 30px; height: 30px; left: 90%; animation-delay: 8s;"></div>
+    <!-- Enhanced Bubbles -->
+    <div class="bubble" style="width: 20px; height: 20px; left: 5%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; left: 25%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 25px; height: 25px; left: 45%; animation-delay: 4s;"></div>
+    <div class="bubble" style="width: 12px; height: 12px; left: 65%; animation-delay: 6s;"></div>
+    <div class="bubble" style="width: 30px; height: 30px; left: 85%; animation-delay: 8s;"></div>
+    <div class="bubble" style="width: 18px; height: 18px; left: 15%; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 22px; height: 22px; left: 75%; animation-delay: 7s;"></div>
 
     <header>
         <nav>
             <a href="#" class="logo">🌊 Traverly</a>
             <ul class="nav-links">
-                <li><a href="#" onclick="showTab('flights')">Flights</a></li>
-                <li><a href="#" onclick="showTab('hotels')">Hotels</a></li>
-                <li><a href="#" onclick="showTab('trains')">Trains</a></li>
-                <li><a href="#" onclick="showTab('packages')">Packages</a></li>
+                <li><a href="#" onclick="showTab('flights')">✈️ Flights</a></li>
+                <li><a href="#" onclick="showTab('hotels')">🏨 Hotels</a></li>
+                <li><a href="#" onclick="showTab('trains')">🚂 Trains</a></li>
+                <li><a href="#" onclick="showTab('packages')">📦 Packages</a></li>
+                <li><a href="#" onclick="showSection('about')">About</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Your Ocean of Adventures</h1>
+            <p class="hero-subtitle">Discover amazing destinations • Book with confidence • Create memories</p>
+            <div class="weather-widget">
+                <p>🌤️ Perfect weather for travel planning!</p>
+            </div>
+        </div>
+
         <div class="search-section">
             <div class="tabs">
                 <button class="tab active" onclick="showTab('flights')">✈️ Flights</button>
@@ -446,175 +740,345 @@
                 <button class="tab" onclick="showTab('packages')">📦 Packages</button>
             </div>
 
-            <!-- Flights Tab -->
+            <!-- Enhanced Flights Tab -->
             <div id="flights" class="tab-content active">
                 <form class="search-form" onsubmit="searchFlights(event)">
                     <div class="form-group">
-                        <label>From</label>
+                        <label>✈️ From</label>
                         <select required>
                             <option value="">Select City</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Mumbai">Mumbai</option>
-                            <option value="Bangalore">Bangalore</option>
-                            <option value="Kolkata">Kolkata</option>
-                            <option value="Chennai">Chennai</option>
+                            <option value="Delhi">Delhi (DEL)</option>
+                            <option value="Mumbai">Mumbai (BOM)</option>
+                            <option value="Bangalore">Bangalore (BLR)</option>
+                            <option value="Kolkata">Kolkata (CCU)</option>
+                            <option value="Chennai">Chennai (MAA)</option>
+                            <option value="Hyderabad">Hyderabad (HYD)</option>
+                            <option value="Pune">Pune (PNQ)</option>
+                            <option value="Ahmedabad">Ahmedabad (AMD)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>To</label>
+                        <label>🏁 To</label>
                         <select required>
-                            <option value="">Select City</option>
-                            <option value="Goa">Goa</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Jaipur">Jaipur</option>
-                            <option value="Dubai">Dubai</option>
-                            <option value="Singapore">Singapore</option>
+                            <option value="">Select Destination</option>
+                            <option value="Goa">Goa (GOI)</option>
+                            <option value="Kerala">Kerala (COK)</option>
+                            <option value="Jaipur">Jaipur (JAI)</option>
+                            <option value="Dubai">Dubai (DXB)</option>
+                            <option value="Singapore">Singapore (SIN)</option>
+                            <option value="Thailand">Bangkok (BKK)</option>
+                            <option value="Maldives">Maldives (MLE)</option>
+                            <option value="Bali">Bali (DPS)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Departure Date</label>
-                        <input type="date" required>
+                        <label>📅 Departure Date</label>
+                        <input type="date" required min="2024-01-01">
                     </div>
                     <div class="form-group">
-                        <label>Passengers</label>
-                        <input type="number" min="1" max="10" value="1" required>
+                        <label>👥 Passengers</label>
+                        <select required>
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5+">5+ Passengers</option>
+                        </select>
                     </div>
                     <button type="submit" class="search-btn">Search Flights 🔍</button>
                 </form>
             </div>
 
-            <!-- Hotels Tab -->
+            <!-- Enhanced Hotels Tab -->
             <div id="hotels" class="tab-content">
                 <form class="search-form" onsubmit="searchHotels(event)">
                     <div class="form-group">
-                        <label>Destination</label>
+                        <label>🏨 Destination</label>
                         <select required>
-                            <option value="">Select City</option>
-                            <option value="Goa">Goa</option>
-                            <option value="Mumbai">Mumbai</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Manali">Manali</option>
-                            <option value="Ooty">Ooty</option>
+                            <option value="">Select Destination</option>
+                            <option value="Goa">Goa - Beach Resorts</option>
+                            <option value="Mumbai">Mumbai - Business Hotels</option>
+                            <option value="Delhi">Delhi - Heritage Hotels</option>
+                            <option value="Manali">Manali - Mountain Resorts</option>
+                            <option value="Ooty">Ooty - Hill Station Hotels</option>
+                            <option value="Udaipur">Udaipur - Palace Hotels</option>
+                            <option value="Rishikesh">Rishikesh - Wellness Retreats</option>
+                            <option value="Shimla">Shimla - Colonial Hotels</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Check-in Date</label>
-                        <input type="date" required>
+                        <label>📅 Check-in Date</label>
+                        <input type="date" required min="2024-01-01">
                     </div>
                     <div class="form-group">
-                        <label>Check-out Date</label>
-                        <input type="date" required>
+                        <label>📅 Check-out Date</label>
+                        <input type="date" required min="2024-01-01">
                     </div>
                     <div class="form-group">
-                        <label>Guests</label>
-                        <input type="number" min="1" max="10" value="2" required>
+                        <label>👥 Guests & Rooms</label>
+                        <select required>
+                            <option value="1">1 Guest, 1 Room</option>
+                            <option value="2">2 Guests, 1 Room</option>
+                            <option value="3">3 Guests, 2 Rooms</option>
+                            <option value="4">4 Guests, 2 Rooms</option>
+                            <option value="5+">5+ Guests, Multiple Rooms</option>
+                        </select>
                     </div>
                     <button type="submit" class="search-btn">Search Hotels 🔍</button>
                 </form>
             </div>
 
-            <!-- Trains Tab -->
+            <!-- Enhanced Trains Tab -->
             <div id="trains" class="tab-content">
                 <form class="search-form" onsubmit="searchTrains(event)">
                     <div class="form-group">
-                        <label>From Station</label>
+                        <label>🚂 From Station</label>
                         <select required>
                             <option value="">Select Station</option>
-                            <option value="New Delhi">New Delhi</option>
+                            <option value="New Delhi">New Delhi Railway Station</option>
                             <option value="Mumbai Central">Mumbai Central</option>
-                            <option value="Howrah">Howrah</option>
+                            <option value="Howrah">Howrah Junction</option>
                             <option value="Chennai Central">Chennai Central</option>
-                            <option value="Bangalore City">Bangalore City</option>
+                            <option value="Bangalore City">Bangalore City Junction</option>
+                            <option value="Secunderabad">Secunderabad Junction</option>
+                            <option value="Pune">Pune Junction</option>
+                            <option value="Ahmedabad">Ahmedabad Junction</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>To Station</label>
+                        <label>🏁 To Station</label>
                         <select required>
-                            <option value="">Select Station</option>
-                            <option value="Agra">Agra</option>
-                            <option value="Jaipur">Jaipur</option>
-                            <option value="Varanasi">Varanasi</option>
-                            <option value="Amritsar">Amritsar</option>
-                            <option value="Kochi">Kochi</option>
+                            <option value="">Select Destination</option>
+                            <option value="Agra">Agra Cantt</option>
+                            <option value="Jaipur">Jaipur Junction</option>
+                            <option value="Varanasi">Varanasi Junction</option>
+                            <option value="Amritsar">Amritsar Junction</option>
+                            <option value="Kochi">Ernakulam Junction</option>
+                            <option value="Goa">Madgaon Junction</option>
+                            <option value="Haridwar">Haridwar Junction</option>
+                            <option value="Jammu">Jammu Tawi</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Travel Date</label>
-                        <input type="date" required>
+                        <label>📅 Travel Date</label>
+                        <input type="date" required min="2024-01-01">
                     </div>
                     <div class="form-group">
-                        <label>Class</label>
+                        <label>🎫 Class</label>
                         <select required>
-                            <option value="AC 1st">AC 1st Class</option>
-                            <option value="AC 2 Tier">AC 2 Tier</option>
-                            <option value="AC 3 Tier">AC 3 Tier</option>
-                            <option value="Sleeper">Sleeper</option>
+                            <option value="AC 1st">AC 1st Class (1A)</option>
+                            <option value="AC 2 Tier">AC 2 Tier (2A)</option>
+                            <option value="AC 3 Tier">AC 3 Tier (3A)</option>
+                            <option value="Sleeper">Sleeper Class (SL)</option>
+                            <option value="Chair Car">AC Chair Car (CC)</option>
                         </select>
                     </div>
                     <button type="submit" class="search-btn">Search Trains 🔍</button>
                 </form>
             </div>
 
-            <!-- Packages Tab -->
+            <!-- Enhanced Packages Tab -->
             <div id="packages" class="tab-content">
                 <div class="packages-grid">
                     <div class="package-card">
-                        <div class="package-image">🏝️</div>
+                        <div class="package-image goa-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
                         <div class="package-info">
                             <h3>Goa Beach Paradise</h3>
-                            <p>5 Days / 4 Nights<br>Flight + Hotel + Meals</p>
+                            <p>Experience the golden beaches, vibrant nightlife, and Portuguese heritage of Goa</p>
+                            <ul class="package-features">
+                                <li>Round-trip flights included</li>
+                                <li>4-star beachfront resort</li>
+                                <li>Daily breakfast & dinner</li>
+                                <li>Water sports activities</li>
+                                <li>Airport transfers</li>
+                            </ul>
+                            <div class="original-price">₹32,999</div>
+                            <div class="discount">22% OFF</div>
                             <div class="package-price">₹25,999 per person</div>
-                            <button class="book-btn" onclick="bookPackage('Goa Beach Paradise', 25999)">Book Now</button>
+                            <button class="book-btn" onclick="bookPackage('Goa Beach Paradise', 25999, 'goa')">Book Now</button>
                         </div>
                     </div>
+                    
                     <div class="package-card">
-                        <div class="package-image">🏔️</div>
+                        <div class="package-image himalaya-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
                         <div class="package-info">
                             <h3>Himalayan Adventure</h3>
-                            <p>7 Days / 6 Nights<br>Transport + Hotel + Activities</p>
+                            <p>Breathtaking mountain views, trekking adventures, and spiritual experiences in the Himalayas</p>
+                            <ul class="package-features">
+                                <li>Professional trek guide</li>
+                                <li>Mountain lodge accommodation</li>
+                                <li>All meals during trek</li>
+                                <li>Camping equipment provided</li>
+                                <li>Medical support</li>
+                            </ul>
+                            <div class="original-price">₹45,999</div>
+                            <div class="discount">20% OFF</div>
                             <div class="package-price">₹35,999 per person</div>
-                            <button class="book-btn" onclick="bookPackage('Himalayan Adventure', 35999)">Book Now</button>
+                            <button class="book-btn" onclick="bookPackage('Himalayan Adventure', 35999, 'himalaya')">Book Now</button>
                         </div>
                     </div>
+                    
                     <div class="package-card">
-                        <div class="package-image">🌴</div>
+                        <div class="package-image kerala-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
                         <div class="package-info">
                             <h3>Kerala Backwaters</h3>
-                            <p>4 Days / 3 Nights<br>Houseboat + Resort + Ayurveda</p>
+                            <p>Serene backwaters, traditional houseboats, and rejuvenating Ayurvedic treatments</p>
+                            <ul class="package-features">
+                                <li>Private houseboat experience</li>
+                                <li>Ayurvedic spa treatments</li>
+                                <li>Traditional Kerala cuisine</li>
+                                <li>Backwater cruises</li>
+                                <li>Cultural performances</li>
+                            </ul>
+                            <div class="original-price">₹24,999</div>
+                            <div class="discount">24% OFF</div>
                             <div class="package-price">₹18,999 per person</div>
-                            <button class="book-btn" onclick="bookPackage('Kerala Backwaters', 18999)">Book Now</button>
+                            <button class="book-btn" onclick="bookPackage('Kerala Backwaters', 18999, 'kerala')">Book Now</button>
                         </div>
                     </div>
+                    
                     <div class="package-card">
-                        <div class="package-image">🏰</div>
+                        <div class="package-image rajasthan-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
                         <div class="package-info">
                             <h3>Rajasthan Heritage</h3>
-                            <p>6 Days / 5 Nights<br>Palace Hotels + Cultural Tours</p>
+                            <p>Royal palaces, majestic forts, and the rich cultural heritage of the Land of Kings</p>
+                            <ul class="package-features">
+                                <li>Heritage palace hotels</li>
+                                <li>Guided fort & palace tours</li>
+                                <li>Camel safari in desert</li>
+                                <li>Traditional Rajasthani cuisine</li>
+                                <li>Folk dance performances</li>
+                            </ul>
+                            <div class="original-price">₹54,999</div>
+                            <div class="discount">22% OFF</div>
                             <div class="package-price">₹42,999 per person</div>
-                            <button class="book-btn" onclick="bookPackage('Rajasthan Heritage', 42999)">Book Now</button>
+                            <button class="book-btn" onclick="bookPackage('Rajasthan Heritage', 42999, 'rajasthan')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="package-card">
+                        <div class="package-image andaman-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
+                        <div class="package-info">
+                            <h3>Andaman Islands</h3>
+                            <p>Pristine beaches, coral reefs, and crystal-clear waters in India's tropical paradise</p>
+                            <ul class="package-features">
+                                <li>Island hopping tours</li>
+                                <li>Scuba diving & snorkeling</li>
+                                <li>Beach resort accommodation</li>
+                                <li>Seafood specialties</li>
+                                <li>Water sports activities</li>
+                            </ul>
+                            <div class="original-price">₹42,999</div>
+                            <div class="discount">23% OFF</div>
+                            <div class="package-price">₹32,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Andaman Islands', 32999, 'andaman')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="package-card">
+                        <div class="package-image kashmir-bg">
+                            <div class="package-emoji"> </div>
+                        </div>
+                        <div class="package-info">
+                            <h3>Kashmir Paradise</h3>
+                            <p>Valley of flowers, snow-capped mountains, and the enchanting beauty of Paradise on Earth</p>
+                            <ul class="package-features">
+                                <li>Houseboat stay in Dal Lake</li>
+                                <li>Shikara rides</li>
+                                <li>Gulmarg & Pahalgam visits</li>
+                                <li>Traditional Kashmiri cuisine</li>
+                                <li>Handicraft shopping tours</li>
+                            </ul>
+                            <div class="original-price">₹38,999</div>
+                            <div class="discount">25% OFF</div>
+                            <div class="package-price">₹28,999 per person</div>
+                            <button class="book-btn" onclick="bookPackage('Kashmir Paradise', 28999, 'kashmir')">Book Now</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Loading Animation -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Searching for the best options...</p>
+        </div>
+
         <!-- Results Section -->
         <div id="results" class="results-section"></div>
     </div>
 
-    <!-- Booking Modal -->
+    <!-- Enhanced Booking Modal -->
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Booking Confirmation</h2>
+            <h2>🎉 Booking Confirmation</h2>
             <div id="billContent" class="bill-container"></div>
-            <button class="download-btn" onclick="downloadBill()">Download Bill as PDF</button>
+            <button class="download-btn" onclick="downloadBill()">📄 Download Bill as PDF</button>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="made-with-love">
+                ❤️ Made with love by Saket ❤️
+            </div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Support</a>
+            </div>
+            <p style="color: #b3d9ff; margin-top: 1rem;">
+                © 2025 Traverly. Your Ocean of Adventures. All rights reserved.
+            </p>
+            <p style="color: #99ccff; font-size: 0.9rem; margin-top: 0.5rem;">
+                🌟 Creating unforgettable travel experiences since 2025 🌟
+            </p>
+        </div>
+    </footer>
+
     <script>
-        // Tab functionality
+        // Enhanced animations and functionality
+        const destinations = {
+            goa: {
+                weather: "🌤️ 28°C, Perfect beach weather",
+                bestTime: "Nov-Feb",
+                highlights: ["Baga Beach", "Old Goa Churches", "Dudhsagar Falls"]
+            },
+            kerala: {
+                weather: "🌧️ 26°C, Pleasant monsoon season",
+                bestTime: "Sep-Mar",
+                highlights: ["Alleppey Backwaters", "Munnar Hill Station", "Kochi Fort"]
+            },
+            rajasthan: {
+                weather: "☀️ 32°C, Warm desert climate",
+                bestTime: "Oct-Mar",
+                highlights: ["Jaipur City Palace", "Udaipur Lakes", "Jaisalmer Fort"]
+            }
+        };
+
+        // Enhanced tab functionality
         function showTab(tabName) {
+            // Add loading effect
+            document.getElementById('loading').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 500);
+
             const tabs = document.querySelectorAll('.tab');
             const contents = document.querySelectorAll('.tab-content');
             
@@ -633,139 +1097,213 @@
             document.getElementById('results').innerHTML = '';
         }
 
-        // Flight Search
+        // Enhanced Flight Search with more realistic data
         function searchFlights(event) {
             event.preventDefault();
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>IndiGo 6E-2342</h3>
-                        <p>Departure: 06:00 AM | Arrival: 08:30 AM</p>
-                        <p>Non-stop | Economy</p>
+            showLoading();
+            
+            setTimeout(() => {
+                const results = document.getElementById('results');
+                results.innerHTML = `
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>✈️ IndiGo 6E-2342</h3>
+                            <div class="result-rating">★★★★☆ 4.2/5 (1,250 reviews)</div>
+                            <p>🕕 Departure: 06:00 AM | 🕘 Arrival: 08:30 AM</p>
+                            <p>✅ Non-stop • Economy Class • Boeing 737</p>
+                            <p>🍽️ Meal included • 📱 In-flight WiFi • 🎒 15kg baggage</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹5,999</div>
+                            <div class="discount">23% OFF</div>
+                            <div class="price">₹4,599</div>
+                            <button class="book-btn" onclick="bookFlight('IndiGo 6E-2342', 4599)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹4,599</div>
-                        <button class="book-btn" onclick="bookFlight('IndiGo 6E-2342', 4599)">Book</button>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>✈️ Air India AI-801</h3>
+                            <div class="result-rating">★★★★☆ 4.0/5 (890 reviews)</div>
+                            <p>🕙 Departure: 10:15 AM | 🕐 Arrival: 12:45 PM</p>
+                            <p>✅ Non-stop • Economy Class • Airbus A320</p>
+                            <p>🍽️ Premium meal • 📱 Entertainment • 🎒 20kg baggage</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹6,899</div>
+                            <div class="discount">20% OFF</div>
+                            <div class="price">₹5,299</div>
+                            <button class="book-btn" onclick="bookFlight('Air India AI-801', 5299)">Book Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Air India AI-801</h3>
-                        <p>Departure: 10:15 AM | Arrival: 12:45 PM</p>
-                        <p>Non-stop | Economy</p>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>✈️ SpiceJet SG-415</h3>
+                            <div class="result-rating">★★★☆☆ 3.8/5 (567 reviews)</div>
+                            <p>🕑 Departure: 02:30 PM | 🕔 Arrival: 05:00 PM</p>
+                            <p>🔄 1 Stop (45min) • Economy Class • Boeing 737</p>
+                            <p>🥤 Refreshments • 🎒 15kg baggage</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹4,999</div>
+                            <div class="discount">22% OFF</div>
+                            <div class="price">₹3,899</div>
+                            <button class="book-btn" onclick="bookFlight('SpiceJet SG-415', 3899)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹5,299</div>
-                        <button class="book-btn" onclick="bookFlight('Air India AI-801', 5299)">Book</button>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>SpiceJet SG-415</h3>
-                        <p>Departure: 02:30 PM | Arrival: 05:00 PM</p>
-                        <p>1 Stop | Economy</p>
-                    </div>
-                    <div>
-                        <div class="price">₹3,899</div>
-                        <button class="book-btn" onclick="bookFlight('SpiceJet SG-415', 3899)">Book</button>
-                    </div>
-                </div>
-            `;
+                `;
+                hideLoading();
+            }, 1500);
         }
 
-        // Hotel Search
+        // Enhanced Hotel Search
         function searchHotels(event) {
             event.preventDefault();
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Ocean Pearl Resort ⭐⭐⭐⭐⭐</h3>
-                        <p>Beach View | Free WiFi | Breakfast Included</p>
-                        <p>Swimming Pool | Spa | Restaurant</p>
+            showLoading();
+            
+            setTimeout(() => {
+                const results = document.getElementById('results');
+                results.innerHTML = `
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🏨 Ocean Pearl Resort</h3>
+                            <div class="result-rating">★★★★★ 4.8/5 (2,340 reviews)</div>
+                            <p>🏖️ Beachfront Location • 🌊 Sea View Rooms • 🏊‍♀️ Infinity Pool</p>
+                            <p>✅ Free WiFi • 🍳 Breakfast Included • 🧘‍♀️ Spa & Wellness</p>
+                            <p>🚗 Airport Transfer • 🎾 Recreation Activities</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹12,999/night</div>
+                            <div class="discount">31% OFF</div>
+                            <div class="price">₹8,999/night</div>
+                            <button class="book-btn" onclick="bookHotel('Ocean Pearl Resort', 8999)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹8,999/night</div>
-                        <button class="book-btn" onclick="bookHotel('Ocean Pearl Resort', 8999)">Book</button>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🏨 Coral Beach Hotel</h3>
+                            <div class="result-rating">★★★★☆ 4.4/5 (1,567 reviews)</div>
+                            <p>🌅 Sea View • ❄️ AC Rooms • 🍳 Complimentary Breakfast</p>
+                            <p>🍸 Beach Bar • 💪 Fitness Center • 🛏️ 24/7 Room Service</p>
+                            <p>🏄‍♂️ Water Sports • 🚗 Free Parking</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹7,999/night</div>
+                            <div class="discount">31% OFF</div>
+                            <div class="price">₹5,499/night</div>
+                            <button class="book-btn" onclick="bookHotel('Coral Beach Hotel', 5499)">Book Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Coral Beach Hotel ⭐⭐⭐⭐</h3>
-                        <p>Sea View | AC Rooms | Complimentary Breakfast</p>
-                        <p>Bar | Gym | 24/7 Room Service</p>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🏨 Sunset Paradise Inn</h3>
+                            <div class="result-rating">★★★☆☆ 4.1/5 (890 reviews)</div>
+                            <p>🌺 Garden View • 🚗 Free Parking • 📶 WiFi Available</p>
+                            <p>🍽️ Multi-cuisine Restaurant • 🗺️ Tour Assistance</p>
+                            <p>🏛️ Near Attractions • 🛏️ Comfortable Rooms</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹4,599/night</div>
+                            <div class="discount">28% OFF</div>
+                            <div class="price">₹3,299/night</div>
+                            <button class="book-btn" onclick="bookHotel('Sunset Paradise Inn', 3299)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹5,499/night</div>
-                        <button class="book-btn" onclick="bookHotel('Coral Beach Hotel', 5499)">Book</button>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Sunset Paradise Inn ⭐⭐⭐</h3>
-                        <p>Garden View | Free Parking | WiFi</p>
-                        <p>Restaurant | Tour Desk</p>
-                    </div>
-                    <div>
-                        <div class="price">₹3,299/night</div>
-                        <button class="book-btn" onclick="bookHotel('Sunset Paradise Inn', 3299)">Book</button>
-                    </div>
-                </div>
-            `;
+                `;
+                hideLoading();
+            }, 1500);
         }
 
-        // Train Search
+        // Enhanced Train Search
         function searchTrains(event) {
             event.preventDefault();
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Shatabdi Express (12002)</h3>
-                        <p>Departure: 06:00 AM | Arrival: 02:00 PM</p>
-                        <p>AC Chair Car | Meals Included</p>
+            showLoading();
+            
+            setTimeout(() => {
+                const results = document.getElementById('results');
+                results.innerHTML = `
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🚂 Shatabdi Express (12002)</h3>
+                            <div class="result-rating">★★★★★ 4.6/5 (3,450 reviews)</div>
+                            <p>🕕 Departure: 06:00 AM | 🕑 Arrival: 02:00 PM (8h 0m)</p>
+                            <p>🎫 AC Chair Car • 🍽️ Meals Included • 📺 Entertainment</p>
+                            <p>❄️ Air Conditioned • 🛏️ Comfortable Seating</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹2,355</div>
+                            <div class="discount">21% OFF</div>
+                            <div class="price">₹1,855</div>
+                            <button class="book-btn" onclick="bookTrain('Shatabdi Express', 1855)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹1,855</div>
-                        <button class="book-btn" onclick="bookTrain('Shatabdi Express', 1855)">Book</button>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🚂 Rajdhani Express (12301)</h3>
+                            <div class="result-rating">★★★★☆ 4.3/5 (2,890 reviews)</div>
+                            <p>🕐 Departure: 04:30 PM | 🕙 Arrival: 10:30 AM (18h 0m)</p>
+                            <p>🛏️ AC 2 Tier • 🍽️ All Meals Included • 🛌 Sleeping Berths</p>
+                            <p>🧳 High Priority • ⚡ Power Outlets</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹3,155</div>
+                            <div class="discount">22% OFF</div>
+                            <div class="price">₹2,455</div>
+                            <button class="book-btn" onclick="bookTrain('Rajdhani Express', 2455)">Book Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Rajdhani Express (12301)</h3>
-                        <p>Departure: 04:30 PM | Arrival: 10:30 AM</p>
-                        <p>AC 2 Tier | Meals Included</p>
+                    
+                    <div class="result-card">
+                        <div class="result-info">
+                            <h3>🚂 Duronto Express (12269)</h3>
+                            <div class="result-rating">★★★★☆ 4.2/5 (1,234 reviews)</div>
+                            <p>🕚 Departure: 11:00 PM | 🕔 Arrival: 05:00 PM (18h 0m)</p>
+                            <p>🛏️ AC 3 Tier • 🚫 Non-stop Service • 🍽️ Pantry Car</p>
+                            <p>💺 Reserved Seating • 🛌 Sleeping Facility</p>
+                        </div>
+                        <div class="result-price-section">
+                            <div class="original-price">₹1,755</div>
+                            <div class="discount">23% OFF</div>
+                            <div class="price">₹1,355</div>
+                            <button class="book-btn" onclick="bookTrain('Duronto Express', 1355)">Book Now</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="price">₹2,455</div>
-                        <button class="book-btn" onclick="bookTrain('Rajdhani Express', 2455)">Book</button>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <div class="result-info">
-                        <h3>Duronto Express (12269)</h3>
-                        <p>Departure: 11:00 PM | Arrival: 05:00 PM</p>
-                        <p>AC 3 Tier | Non-stop</p>
-                    </div>
-                    <div>
-                        <div class="price">₹1,355</div>
-                        <button class="book-btn" onclick="bookTrain('Duronto Express', 1355)">Book</button>
-                    </div>
-                </div>
-            `;
+                `;
+                hideLoading();
+            }, 1500);
         }
 
-        // Booking functions
+        // Loading functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').innerHTML = '';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Enhanced booking functions
         let currentBooking = {};
 
         function bookFlight(flightName, price) {
             currentBooking = {
                 type: 'Flight',
+                icon: '✈️',
                 name: flightName,
                 price: price,
-                date: new Date().toLocaleDateString(),
-                bookingId: 'FL' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                date: new Date().toLocaleDateString('en-IN'),
+                time: new Date().toLocaleTimeString('en-IN'),
+                bookingId: 'FL' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                extras: {
+                    baggage: '20kg Checked Baggage',
+                    meal: 'In-flight Meal',
+                    insurance: 'Travel Insurance'
+                }
             };
             showBookingModal();
         }
@@ -773,10 +1311,17 @@
         function bookHotel(hotelName, price) {
             currentBooking = {
                 type: 'Hotel',
+                icon: '🏨',
                 name: hotelName,
                 price: price,
-                date: new Date().toLocaleDateString(),
-                bookingId: 'HT' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                date: new Date().toLocaleDateString('en-IN'),
+                time: new Date().toLocaleTimeString('en-IN'),
+                bookingId: 'HT' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                extras: {
+                    breakfast: 'Complimentary Breakfast',
+                    wifi: 'Free WiFi',
+                    parking: 'Free Parking'
+                }
             };
             showBookingModal();
         }
@@ -784,21 +1329,35 @@
         function bookTrain(trainName, price) {
             currentBooking = {
                 type: 'Train',
+                icon: '🚂',
                 name: trainName,
                 price: price,
-                date: new Date().toLocaleDateString(),
-                bookingId: 'TR' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                date: new Date().toLocaleDateString('en-IN'),
+                time: new Date().toLocaleTimeString('en-IN'),
+                bookingId: 'TR' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                extras: {
+                    seat: 'Reserved Seat',
+                    meal: 'Onboard Meals',
+                    bedding: 'Fresh Bedding'
+                }
             };
             showBookingModal();
         }
 
-        function bookPackage(packageName, price) {
+        function bookPackage(packageName, price, destination) {
+            const destInfo = destinations[destination] || {};
             currentBooking = {
                 type: 'Package',
+                icon: '📦',
                 name: packageName,
                 price: price,
-                date: new Date().toLocaleDateString(),
-                bookingId: 'PK' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                date: new Date().toLocaleDateString('en-IN'),
+                time: new Date().toLocaleTimeString('en-IN'),
+                bookingId: 'PK' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                destination: destination,
+                weather: destInfo.weather || '🌤️ Perfect weather',
+                bestTime: destInfo.bestTime || 'Year round',
+                highlights: destInfo.highlights || []
             };
             showBookingModal();
         }
@@ -808,42 +1367,77 @@
             const billContent = document.getElementById('billContent');
             
             const subtotal = currentBooking.price;
-            const tax = Math.round(subtotal * 0.18); // 18% GST
-            const total = subtotal + tax;
+            const convenienceFee = Math.round(subtotal * 0.02); // 2% convenience fee
+            const gst = Math.round((subtotal + convenienceFee) * 0.18); // 18% GST
+            const total = subtotal + convenienceFee + gst;
+            
+            let extrasHtml = '';
+            if (currentBooking.extras) {
+                extrasHtml = '<div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 10px;">';
+                extrasHtml += '<h4 style="color: #0066cc; margin-bottom: 0.5rem;">Included Benefits:</h4>';
+                Object.values(currentBooking.extras).forEach(extra => {
+                    extrasHtml += `<p style="margin: 0.2rem 0; color: #00cc66;">✓ ${extra}</p>`;
+                });
+                extrasHtml += '</div>';
+            }
+
+            let destinationInfo = '';
+            if (currentBooking.destination && destinations[currentBooking.destination]) {
+                const dest = destinations[currentBooking.destination];
+                destinationInfo = `
+                    <div style="margin: 1rem 0; padding: 1rem; background: #e3f2fd; border-radius: 10px;">
+                        <h4 style="color: #0066cc; margin-bottom: 0.5rem;">Destination Info:</h4>
+                        <p style="margin: 0.2rem 0;">${dest.weather}</p>
+                        <p style="margin: 0.2rem 0;"><strong>Best Time:</strong> ${dest.bestTime}</p>
+                        <p style="margin: 0.2rem 0;"><strong>Must Visit:</strong> ${dest.highlights.join(', ')}</p>
+                    </div>
+                `;
+            }
             
             billContent.innerHTML = `
                 <div class="bill-header">
                     <h1 style="color: #0066cc;">🌊 Traverly</h1>
-                    <p>Your Ocean of Adventures</p>
+                    <p style="color: #666; font-size: 1.1rem;">Your Ocean of Adventures</p>
+                    <p style="color: #999; font-size: 0.9rem;">✨ Creating magical travel moments ✨</p>
                 </div>
                 <div class="bill-details">
                     <div class="bill-row">
                         <strong>Booking ID:</strong>
-                        <span>${currentBooking.bookingId}</span>
+                        <span style="color: #0066cc; font-weight: bold;">${currentBooking.bookingId}</span>
                     </div>
                     <div class="bill-row">
-                        <strong>Date:</strong>
-                        <span>${currentBooking.date}</span>
+                        <strong>Date & Time:</strong>
+                        <span>${currentBooking.date} at ${currentBooking.time}</span>
                     </div>
                     <div class="bill-row">
-                        <strong>Type:</strong>
-                        <span>${currentBooking.type}</span>
+                        <strong>Service Type:</strong>
+                        <span>${currentBooking.icon} ${currentBooking.type}</span>
                     </div>
                     <div class="bill-row">
-                        <strong>Service:</strong>
+                        <strong>Service Details:</strong>
                         <span>${currentBooking.name}</span>
                     </div>
+                    ${extrasHtml}
+                    ${destinationInfo}
                     <div class="bill-row">
                         <strong>Base Amount:</strong>
                         <span>₹${subtotal.toLocaleString()}</span>
                     </div>
                     <div class="bill-row">
+                        <strong>Convenience Fee (2%):</strong>
+                        <span>₹${convenienceFee.toLocaleString()}</span>
+                    </div>
+                    <div class="bill-row">
                         <strong>GST (18%):</strong>
-                        <span>₹${tax.toLocaleString()}</span>
+                        <span>₹${gst.toLocaleString()}</span>
                     </div>
                     <div class="bill-row bill-total">
                         <strong>Total Amount:</strong>
-                        <span>₹${total.toLocaleString()}</span>
+                        <span style="color: #0066cc;">₹${total.toLocaleString()}</span>
+                    </div>
+                    <div style="margin-top: 2rem; padding: 1rem; background: linear-gradient(135deg, #e8f5e8, #f0fff0); border-radius: 10px; border-left: 4px solid #00cc66;">
+                        <h4 style="color: #00aa55; margin-bottom: 0.5rem;">🎉 Booking Confirmed!</h4>
+                        <p style="color: #006633; margin: 0;">Thank you for choosing Traverly. Your adventure awaits!</p>
                     </div>
                 </div>
             `;
@@ -863,18 +1457,26 @@
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>Traverly Invoice</title>
+                    <title>Traverly Invoice - ${currentBooking.bookingId}</title>
                     <style>
                         body {
-                            font-family: Arial, sans-serif;
-                            padding: 20px;
-                            max-width: 600px;
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            padding: 30px;
+                            max-width: 700px;
                             margin: 0 auto;
+                            line-height: 1.6;
+                            color: #333;
                         }
                         .bill-header {
                             text-align: center;
-                            padding-bottom: 20px;
-                            border-bottom: 2px solid #e0e0e0;
+                            padding-bottom: 25px;
+                            border-bottom: 3px solid #0066cc;
+                            margin-bottom: 25px;
+                        }
+                        .bill-header h1 {
+                            color: #0066cc;
+                            font-size: 2.5rem;
+                            margin-bottom: 10px;
                         }
                         .bill-details {
                             padding: 20px 0;
@@ -882,14 +1484,32 @@
                         .bill-row {
                             display: flex;
                             justify-content: space-between;
-                            padding: 10px 0;
+                            padding: 12px 0;
+                            border-bottom: 1px solid #f0f0f0;
+                        }
+                        .bill-row:last-child {
+                            border-bottom: none;
                         }
                         .bill-total {
-                            border-top: 2px solid #e0e0e0;
+                            border-top: 3px solid #0066cc;
                             padding-top: 20px;
                             margin-top: 20px;
                             font-weight: bold;
-                            font-size: 1.2rem;
+                            font-size: 1.3rem;
+                            background: #f8f9ff;
+                            padding: 20px;
+                            border-radius: 10px;
+                        }
+                        .footer-info {
+                            margin-top: 50px;
+                            text-align: center;
+                            color: #666;
+                            border-top: 2px solid #e0e0e0;
+                            padding-top: 25px;
+                        }
+                        .footer-info h3 {
+                            color: #0066cc;
+                            margin-bottom: 15px;
                         }
                         @media print {
                             body {
@@ -901,9 +1521,16 @@
                 </head>
                 <body>
                     ${billContent}
-                    <div style="margin-top: 50px; text-align: center; color: #666;">
-                        <p>Thank you for choosing Traverly!</p>
-                        <p>For support: support@traverly.com | +91-1800-TRAVERLY</p>
+                    <div class="footer-info">
+                        <h3>Thank you for choosing Traverly!</h3>
+                        <p><strong>Customer Support:</strong> support@traverly.com | +91-1800-TRAVERLY</p>
+                        <p><strong>Website:</strong> www.traverly.com</p>
+                        <p style="margin-top: 25px; font-style: italic;">
+                            "Your Ocean of Adventures - Creating magical travel moments since 2024"
+                        </p>
+                        <p style="margin-top: 15px; color: #ff6b35;">
+                            ❤️ Made with love by Saket ❤️
+                        </p>
                     </div>
                 </body>
                 </html>
@@ -914,43 +1541,167 @@
             printWindow.print();
         }
 
-        // Add more sea creatures dynamically
+        // Enhanced creature animations
         function addMoreCreatures() {
-            const creatures = ['🐟', '🐠', '🐡', '🦈', '🐙', '🦑', '🦐', '🦀', '🐢', '🐬'];
-            setInterval(() => {
-                const creature = document.createElement('div');
-                creature.className = Math.random() > 0.8 ? 'shark' : 'fish';
-                creature.style.top = Math.random() * 80 + 10 + '%';
-                creature.style.animationDelay = '0s';
-                creature.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                creature.textContent = creatures[Math.floor(Math.random() * creatures.length)];
-                document.body.appendChild(creature);
-                
-                setTimeout(() => creature.remove(), 35000);
-            }, 5000);
+            const creatures = ['🐟', '🐠', '🐡', '🦈', '🐙', '🦑', '🦐', '🦀', '🐢', '🐬', '🦭', '🐳', '🦞', '🪼'];
+            const creatureInterval = setInterval(() => {
+                if (document.visibilityState === 'visible') {
+                    const creature = document.createElement('div');
+                    creature.className = Math.random() > 0.85 ? 'shark' : 'fish';
+                    creature.style.top = Math.random() * 80 + 5 + '%';
+                    creature.style.animationDelay = '0s';
+                    creature.style.animationDuration = (Math.random() * 25 + 15) + 's';
+                    creature.textContent = creatures[Math.floor(Math.random() * creatures.length)];
+                    creature.style.opacity = Math.random() * 0.3 + 0.7;
+                    document.body.appendChild(creature);
+                    
+                    setTimeout(() => {
+                        if (creature.parentNode) {
+                            creature.remove();
+                        }
+                    }, 40000);
+                }
+            }, 4000);
         }
 
-        // Add more bubbles
+        // Enhanced bubble system
         function addMoreBubbles() {
-            setInterval(() => {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                bubble.style.width = Math.random() * 20 + 10 + 'px';
-                bubble.style.height = bubble.style.width;
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.animationDelay = '0s';
-                bubble.style.animationDuration = Math.random() * 5 + 8 + 's';
-                document.getElementById('ocean-bg').appendChild(bubble);
-                
-                setTimeout(() => bubble.remove(), 13000);
-            }, 2000);
+            const bubbleInterval = setInterval(() => {
+                if (document.visibilityState === 'visible') {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'bubble';
+                    const size = Math.random() * 25 + 8;
+                    bubble.style.width = size + 'px';
+                    bubble.style.height = size + 'px';
+                    bubble.style.left = Math.random() * 100 + '%';
+                    bubble.style.animationDelay = Math.random() * 2 + 's';
+                    bubble.style.animationDuration = Math.random() * 8 + 10 + 's';
+                    bubble.style.opacity = Math.random() * 0.4 + 0.6;
+                    document.getElementById('ocean-bg').appendChild(bubble);
+                    
+                    setTimeout(() => {
+                        if (bubble.parentNode) {
+                            bubble.remove();
+                        }
+                    }, 18000);
+                }
+            }, 1500);
         }
 
-        // Initialize animations
-        window.onload = function() {
+        // Weather simulation
+        function updateWeather() {
+            const weatherOptions = [
+                "🌤️ Perfect weather for travel planning!",
+                "🌊 Ocean breeze feels amazing today!",
+                "☀️ Sunny skies ahead for your adventures!",
+                "🌈 Rainbow weather brings good luck!",
+                "⛅ Partly cloudy, perfect for sightseeing!"
+            ];
+            
+            setInterval(() => {
+                const weatherWidget = document.querySelector('.weather-widget p');
+                if (weatherWidget) {
+                    weatherWidget.textContent = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
+                }
+            }, 30000);
+        }
+
+        // Enhanced date validation
+        function setMinDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.setAttribute('min', minDate);
+            });
+        }
+
+        // Smooth scrolling for navigation
+        function smoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Performance optimization
+        function optimizeAnimations() {
+            // Pause animations when page is not visible
+            document.addEventListener('visibilitychange', function() {
+                const animations = document.querySelectorAll('.fish, .shark, .bubble');
+                if (document.visibilityState === 'hidden') {
+                    animations.forEach(el => {
+                        el.style.animationPlayState = 'paused';
+                    });
+                } else {
+                    animations.forEach(el => {
+                        el.style.animationPlayState = 'running';
+                    });
+                }
+            });
+        }
+
+        // Initialize all enhancements
+        window.addEventListener('load', function() {
             addMoreCreatures();
             addMoreBubbles();
+            updateWeather();
+            setMinDate();
+            smoothScroll();
+            optimizeAnimations();
+            
+            // Add loading animation on first load
+            setTimeout(() => {
+                document.querySelector('.hero-section').style.opacity = '1';
+                document.querySelector('.search-section').style.opacity = '1';
+            }, 500);
+        });
+
+        // Responsive navigation for mobile
+        function initMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const logo = document.querySelector('.logo');
+            
+            if (window.innerWidth <= 768) {
+                logo.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+                });
+            }
         }
+
+        // Call mobile menu initialization
+        window.addEventListener('resize', initMobileMenu);
+        window.addEventListener('load', initMobileMenu);
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Analytics simulation (for demonstration)
+        function trackBooking(type, price) {
+            console.log(`Booking tracked: ${type} - ₹${price}`);
+            // In real implementation, this would send data to analytics service
+        }
+
+        // Enhanced error handling
+        window.addEventListener('error', function(e) {
+            console.error('An error occurred:', e.error);
+            // In production, this would send error reports to monitoring service
+        });
     </script>
 </body>
 </html>
